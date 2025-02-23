@@ -10,8 +10,26 @@ router = APIRouter()
 anime_service_url = os.getenv("ANIME_SERVICE_URL")
 
 
+@router.get("/animes")
+async def get_animes():
+    """
+    Fetch all animes
+
+    Args:
+        None.
+
+    Returns:
+        dict: All all animes found.
+    """
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            f'{anime_service_url}/animes'
+        )
+    return response.json()
+
+
 @router.get("/anime/{anime_id}")
-async def get_anime_endpoint(anime_id: int):
+async def get_anime(anime_id: int):
     """
     Fetch an anime by its unique anime ID.
 
@@ -23,6 +41,6 @@ async def get_anime_endpoint(anime_id: int):
     """
     async with httpx.AsyncClient() as client:
         response = await client.get(
-            f'{anime_service_url}/animes/{anime_id}'
+            f'{anime_service_url}/anime/{anime_id}'
         )
     return response.json()
