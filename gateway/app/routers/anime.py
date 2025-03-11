@@ -25,6 +25,7 @@ async def get_animes():
         response = await client.get(
             f'{anime_service_url}/animes'
         )
+        response.raise_for_status()
     return response.json()
 
 
@@ -43,4 +44,5 @@ async def get_anime(anime_id: int):
         response = await client.get(
             f'{anime_service_url}/anime/{anime_id}'
         )
+        response.raise_for_status()
     return response.json()

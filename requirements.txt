@@ -1,6 +1,2 @@
 tox
-flake8
-mypy
-pytest
-coverage
 uvicorn
